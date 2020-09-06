@@ -10,7 +10,7 @@ phn_validator = RegexValidator(r"^[0-9]{10}$", "Phone number must be of 10 digit
 class Student(AbstractUser):
     name = models.CharField(max_length = 30, blank = True)
     ph_no = models.IntegerField(validators=[phn_validator])
-    roll_no = models.CharField(max_length = 10, unique = True)
+    roll_no = models.CharField(max_length = 10, primary_key=True)
     address = models.TextField()
     room_no = models.IntegerField() 
 
