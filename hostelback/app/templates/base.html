@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.header {
+  overflow: hidden;
+  background-color: #000;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.header a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.header a:hover {
+  background: #ddd;
+  color: black;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+</style>
+</head>
+<body>
+
+    <div class="header" style="overflow: hidden;">
+        <h2 style=" color: white;display: inline;text-align: center; padding-left: 25em;">HOSTEL MANAGEMENT</h2>
+        <p style="color: white;display: inline; float: right; margin: 0em;" >
+          <a href="{% url 'complaint' %}">Signout</a></p>
+      </div>
+
+<div class="sidenav">
+  <a href="#"><i class="fa fa-fw fa-home"></i>Home</a>
+  <a href="#"><i class="fa fa-thumb-tack">Notice</a>
+  <a href="{% url 'complaint' %}"><i class="fa fa-fw fa-exclamation">Complaint</a>
+  <a href="{% url 'leave' %}"><i class="fa fa-fw fa-suitcase">Leave</a>
+  <a href="#"><i class="fa fa-fw fa-user">Occupants</a>
+</div>
+
+  
+
+</script> 
+</body>
+</html> 

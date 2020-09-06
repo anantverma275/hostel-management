@@ -37,7 +37,7 @@ class Leave(models.Model):
 
 class Complaint(models.Model):
     description = models.TextField()
-    type = models.CharField(max_length=20)
+    type_of_complain = models.CharField(max_length=20)
     date = models.DateField(auto_now_add=True)
     room_no = models.IntegerField()
 
