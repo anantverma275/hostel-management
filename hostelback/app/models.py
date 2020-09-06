@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 from django.core.validators import RegexValidator
-#phn_validator = RegexValidator(r"^[0-9]{10}$", "Phone number must be of 10 digits only consisting of number form 0-9.")
+phn_validator = RegexValidator(r"^[0-9]{10}$", "Phone number must be of 10 digits only consisting of number form 0-9.")
 
 # Create your models here.
 
