@@ -74,12 +74,13 @@ body {
     <div class="header" style="overflow: hidden;">
         <h2 style=" color: white;display: inline;text-align: center; padding-left: 25em;">HOSTEL MANAGEMENT</h2>
         <p style="color: white;display: inline; float: right; margin: 0em;" >
-          <a href="{% url 'complaint' %}">Signout</a></p>
+          <a href="#">Signout</a>
+        </p>
       </div>
 
 <div class="sidenav">
-  <a href="#"><i class="fa fa-fw fa-home"></i>Home</a>
-  <a href="#"><i class="fa fa-thumb-tack">Notice</a>
+  <a href="{% url 'redisplay' %}"><i class="fa fa-fw fa-home"></i>Home</a>
+  <a href="{% url 'notice' %}"><i class="fa fa-thumb-tack">Notice</a>
   <a href="{% url 'complaint' %}"><i class="fa fa-fw fa-exclamation">Complaint</a>
   <a href="{% url 'leave' %}"><i class="fa fa-fw fa-suitcase">Leave</a>
   <a href="#"><i class="fa fa-fw fa-user">Occupants</a>
@@ -89,6 +90,4 @@ body {
 
 </script> 
 </body>
-
-<div class="uid is: "> {{uid}} </div>
 </html> 

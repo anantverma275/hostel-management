@@ -11,6 +11,12 @@ from .models import Student,Leave
 def signin(request):
     return render(request, "login.html")
 
+def notice(request):
+    return render(request,"notice.html")
+
+def redisplay(request):
+    return render(request,"base.html")
+
 def dashboard(request):
     rollnumber = request.POST['rollnumber']
     password = request.POST['password']
