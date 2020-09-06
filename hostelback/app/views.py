@@ -16,7 +16,7 @@ def dashboard(request):
     if user is not None:
         print("User authenticated")
         login(request, user)
-        return HttpResponse("<h1> logged in successfully </h1>")
+        return render(request,"d_temp.html")
     else:
         return HttpResponse("<h1> hag diya </h1>")
 
@@ -29,6 +29,9 @@ def leave(request):
 
 def complaint(request):
     return render(request, "complaint.html")
+
+def profile_change(request):
+    return HttpResponse("<h1> profile change walla page aayega yahan </h1>")
 
 def register(request):
     if (request.method == "POST"):
@@ -50,3 +53,5 @@ def register(request):
         #     print("succesS")
     else:
         return render(request, "register.html")
+
+

@@ -8,6 +8,9 @@ urlpatterns = [
     path('dashboard', views.dashboard, name="dashboard"),
     path('leave', views.leave, name="leave"),
     path('complaint', views.complaint, name="complaint"),
+    path('profilechange', views.profile_change, name="profilechange"),
     path('register', views.register, name="register"),
     path('logout/', auth_views.LogoutView.as_view(template_name="login.html"), name='logout'),
 ]
+
+

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+
+  <body class="text-center">
+    <form action="{% url 'leave' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" className="btn"> applyleave </button>
+    </form>
+    <form action="{% url 'complaint' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" className="btn"> lodge complaint </button>
+    </form>
+    <form action="{% url 'profilechange' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" className="btn"> profile change </button>
+    </form>
+    
+    
+  </body>
+
+</html>
