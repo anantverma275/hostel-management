@@ -20,3 +20,12 @@ def verify(request):
 
 def dashboard(request):
     return render(request, "dashboard.html")
+
+def leave(request):
+    return render(request, "leave.html")
+
+def complaint(request):
+    return render(request, "complaint.html")
+
+def register(request):
+    return render(request, "register.html")
