@@ -2,14 +2,14 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 from django.core.validators import RegexValidator
-phn_validator = RegexValidator(r"^[0-9]{10}$", "Phone number must be of 10 digits only.")
+#phn_validator = RegexValidator(r"^[0-9]{10}$", "Phone number must be of 10 digits only consisting of number form 0-9.")
 
 # Create your models here.
 
 
 class Student(AbstractUser):
     name = models.CharField(max_length = 30, blank = True)
-    ph_no = models.IntegerField(validators=phn_validator)
+    ph_no = models.IntegerField(max_length=10, blank=False)
     roll_no = models.CharField(max_length = 10, unique = True)
     address = models.TextField()
     room_no = models.IntegerField() 
@@ -24,8 +24,9 @@ class Leave(models.Model):
     reason = models.TextField()
     status_accepted = models.BooleanField(default = False)
 
-    def __str__(self):
-	    return "ID Number: " + self.applicant.roll_no +" | Status: "+ self.status_accepted
+    #def __str__(self):
+    
+	#    return "ID Number: " + self.applicant.roll_no +" | Status: "+ self.status_accepted
 
 class Complaint(models.Model):
     description = models.TextField()
