@@ -1,0 +1,94 @@
+.App {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Open Sans", sans-serif; }
+    .App .login {
+      width: 27em;
+      height: 45em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 5px;
+      position: relative;
+      z-index: 99; }
+      .App .login .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        box-shadow: 0px 0px 12px 2px rgba(15, 15, 15, 0.2);
+        border-radius: 4px;
+        position: relative;
+        z-index: 99;
+        width: 100%;
+        height: 100%;
+        z-index: 99;
+        padding: 10px; }
+        .App .login .container .base-container {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center; }
+          .App .login .container .base-container .header {
+            font-size: 30px;
+            font-family: "Open Sans", sans-serif; }
+          .App .login .container .base-container .content {
+            display: flex;
+            flex-direction: column; }
+            .App .login .container .base-container .content .image {
+              padding-left: 5em;
+              width: 20em; }
+              .App .login .container .base-container .content .image img {
+                width: 100%;
+                height: 100%; }
+            .App .login .container .base-container .content .form {
+              margin-top: 0em;
+              display: flex;
+              flex-direction: column;
+              align-items: center; }
+              .App .login .container .base-container .content .form .form-group {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                width: fit-content; }
+                .App .login .container .base-container .content .form .form-group label {
+                  padding-left: 5px;
+                  font-size: 20px; }
+                .App .login .container .base-container .content .form .form-group input {
+                  margin-top: 6px;
+                  min-width: 24em;
+                  height: 30px;
+                  padding: 0px 10px;
+                  font-size: 16px;
+                  font-family: "Open Sans", sans-serif;
+                  background-color: #f3f3f3;
+                  border: 0;
+                  border-radius: 4px;
+                  margin-bottom: 10px;
+                  transition: all 250ms ease-in-out; }
+                  .App .login .container .base-container .content .form .form-group input:focus {
+                    outline: none;
+                    box-shadow: 0px 0px 12px 0.8px #3474db b2; }
+          .App .login .container .base-container .footer {
+            margin-top: 0em; }
+  
+  .btn {
+    font-size: 21px;
+    padding: 5px 20px;
+    border: 0;
+    background-color: #3498db;
+    color: #fff;
+    border-radius: 3px;
+    transition: all 250ms ease-in-out;
+    cursor: pointer; }
+    .btn:hover {
+      background-color: #2386c8; }
+    .btn:focus {
+      outline: none; }
+
+      .containers{
+        margin-left: 3em;
+        margin-right: 0em;
+      }
