@@ -25,18 +25,14 @@ class Student(AbstractUser):
 	    return self.name + self.roll_no
 
 class Leave(models.Model):
-    applicant_name=models.TextField(default="name")
-    applicant_roll_no=models.TextField(default="roll_number")
-    address_to_go=models.TextField(default="home address")
-    applicant_phn=models.TextField(default="phone number")
+    identity = models.ForeignKey("Student", on_delete = models.CASCADE, default = 1)
     start_date = models.DateField()
     end_date = models.DateField()
     reason = models.TextField(default="no reason")
     status_accepted = models.BooleanField(default = False)
 
-    #def __str__(self):
-    
-	#    return "ID Number: " + self.applicant.roll_no +" | Status: "+ self.status_accepted
+    def __str__(self):
+        return "ID Number: " + str(self.identity.roll_no) +" | Status: "+ str(self.status_accepted)
 
 class Complaint(models.Model):
     identity = models.ForeignKey("Student", on_delete=models.CASCADE)

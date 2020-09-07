@@ -44,37 +44,28 @@ def dashboard(request):
 # def dashboard(request):
 #     return render(request, "dashboard.html")
 
+@login_required
 def leave(request):
     # this function is used to just render the page leave.html
-    print(request.user)
+    # print(request.user)
     return render(request, "leave.html")
 
-def apply_leave(request):
+def leave_req(request):
     # this function accepts the parameters and data for leave application and saves it to database
     print(request.user)
     if (request.method == "POST"):
-        if request.POST.get("name"):print("name sahi")
-        if request.POST.get("roll"):print("roll sahi")
-        if request.POST.get("address"):print("address sahi")
-        if request.POST.get("phn"):print("phn sahi")
-        if request.POST.get("reason"):print("reason sahi")
-        if request.POST.get("strt_date"):print("strt_date sahi")
-        if request.POST.get("end_date"):print("end_date sahi")
-        if request.POST.get("address") and request.POST.get("phn") and request.POST.get("roll") and request.POST.get("name") and request.POST.get("reason") and request.POST.get("strt_date") and request.POST.get("end_date") :
-            print("leave application ki request aayi")
+        if request.POST.get("reason") and request.POST.get("strt_date") and request.POST.get("end_date") :
+            # print("leave application ki request aayi")
             # now we fill relevant leave parameters 
-            appn=Leave()
-            appn.applicant_name=request.POST.get("name")
-            appn.applicant_phn=request.POST.get("phn")
-            appn.applicant_roll_no=request.POST.get("roll")
-            appn.address_to_go=request.POST.get("add")
-            appn.start_date=request.POST.get("strt_date")
-            appn.end_date=request.POST.get("end_date")
-            appn.reason=request.POST.get("reason")
-            appn.save()
-            return HttpResponse("<h1> Application for leave placed </h1>")
+            leave_obj=Leave()
+            leave_obj.identity = request.user
+            leave_obj.start_date=request.POST.get("strt_date")
+            leave_obj.end_date=request.POST.get("end_date")
+            leave_obj.reason=request.POST.get("reason")
+            leave_obj.save()
+            return redirect("dashboard")
         else:
-            return HttpResponse("<h1> sahi se bharle </h1>")
+            return HttpResponse(request, "leave.html")
         # return render(request, "leave.htm")
 @login_required
 def complaint(request):
