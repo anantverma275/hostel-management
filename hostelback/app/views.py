@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from .models import Student,Leave
+from .models import Student,Leave,Complaint
 # from .forms import StudentRegistrationForm
 
 #bcs2018_007 salil1
@@ -11,8 +11,8 @@ from .models import Student,Leave
 def signin(request):
     return render(request, "login.html")
 
-def notice(request):
-    return render(request,"notice.html")
+def notice_stud(request):
+    return render(request,"notice_stud.html")
 
 def redisplay(request):
     return render(request,"base.html")
@@ -42,33 +42,51 @@ def apply_leave(request):
     # this function accepts the parameters and data for leave application and saves it to database
     print(request.user)
     if (request.method == "POST"):
+        if request.POST.get("name"):print("name sahi")
+        if request.POST.get("roll"):print("roll sahi")
         if request.POST.get("address"):print("address sahi")
         if request.POST.get("phn"):print("phn sahi")
         if request.POST.get("reason"):print("reason sahi")
         if request.POST.get("strt_date"):print("strt_date sahi")
         if request.POST.get("end_date"):print("end_date sahi")
-        if  request.POST.get("address") and request.POST.get("phn") and request.POST.get("reason") and request.POST.get("strt_date") and request.POST.get("end_date"):
+        if request.POST.get("address") and request.POST.get("phn") and request.POST.get("roll") and request.POST.get("name") and request.POST.get("reason") and request.POST.get("strt_date") and request.POST.get("end_date") :
             print("leave application ki request aayi")
             # now we fill relevant leave parameters 
             appn=Leave()
-            appn.applicant=request.user
-            appn.address_to_go=request.POST.get("address")
+            appn.applicant_name=request.POST.get("name")
+            appn.applicant_phn=request.POST.get("phn")
+            appn.applicant_roll_no=request.POST.get("roll")
+            appn.address_to_go=request.POST.get("add")
             appn.start_date=request.POST.get("strt_date")
             appn.end_date=request.POST.get("end_date")
-            appn.reason=request.POST.get("Reason")
+            appn.reason=request.POST.get("reason")
             appn.save()
             return HttpResponse("<h1> Application for leave placed </h1>")
-        # form = StudentRegistrationForm(request.POST)
-        # print(form)
-        # if form.is_valid():
-        #     form.save()
-        #     print("succesS")
         else:
             return HttpResponse("<h1> sahi se bharle </h1>")
         # return render(request, "leave.htm")
 
 def complaint(request):
     return render(request, "complaint.html")
+
+def place_complain(request):
+    if (request.method == "POST"):
+        if request.POST.get("name"):print("name sahi")
+        if request.POST.get("RoomNo"):print("RoomNo sahi")
+        if request.POST.get("category"):print("category sahi")
+        if request.POST.get("Description"):print("Description sahi")
+        if  request.POST.get("name") and request.POST.get("RoomNo") and request.POST.get("category") and request.POST.get("Description"):
+            print("complaint ki request aayi")
+            cmpl=Complaint()
+            cmpl.name_complaintant=request.POST.get("name")
+            cmpl.room_no=request.POST.get("RoomNo")
+            cmpl.type_of_complain=request.POST.get("category")
+            cmpl.description=request.POST.get("description")
+            return HttpResponse("<h1> Complaint placed </h1>")
+        else : return HttpResponse("<h1> complaint could not be placed </h1>")
+
+
+
 
 def profile_change(request):
     return HttpResponse("<h1> profile change walla page aayega yahan </h1>")

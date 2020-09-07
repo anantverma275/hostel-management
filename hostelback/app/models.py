@@ -25,11 +25,13 @@ class Student(AbstractUser):
 	    return self.name + self.roll_no
 
 class Leave(models.Model):
-    applicant = models.ForeignKey("Student", on_delete = models.CASCADE)
-    address_to_go=models.TextField(default = "home address")
+    applicant_name=models.TextField(default="name")
+    applicant_roll_no=models.TextField(default="roll_number")
+    address_to_go=models.TextField(default="home address")
+    applicant_phn=models.TextField(default="phone number")
     start_date = models.DateField()
     end_date = models.DateField()
-    reason = models.TextField()
+    reason = models.TextField(default="no reason")
     status_accepted = models.BooleanField(default = False)
 
     #def __str__(self):
@@ -37,6 +39,7 @@ class Leave(models.Model):
 	#    return "ID Number: " + self.applicant.roll_no +" | Status: "+ self.status_accepted
 
 class Complaint(models.Model):
+    name_complaintant=models.TextField(default="name")
     description = models.TextField()
     type_of_complain = models.CharField(max_length=20)
     date = models.DateField(auto_now_add=True)
