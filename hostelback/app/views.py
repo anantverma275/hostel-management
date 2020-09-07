@@ -76,25 +76,24 @@ def apply_leave(request):
         else:
             return HttpResponse("<h1> sahi se bharle </h1>")
         # return render(request, "leave.htm")
-
+@login_required
 def complaint(request):
     return render(request, "complaint.html")
 
-def place_complain(request):
+def complaint_req(request):
     if (request.method == "POST"):
-        if request.POST.get("name"):print("name sahi")
-        if request.POST.get("RoomNo"):print("RoomNo sahi")
-        if request.POST.get("category"):print("category sahi")
-        if request.POST.get("Description"):print("Description sahi")
-        if  request.POST.get("name") and request.POST.get("RoomNo") and request.POST.get("category") and request.POST.get("Description"):
+        if request.POST.get("category") and request.POST.get("desc"):
             print("complaint ki request aayi")
             cmpl=Complaint()
-            cmpl.name_complaintant=request.POST.get("name")
-            cmpl.room_no=request.POST.get("RoomNo")
-            cmpl.type_of_complain=request.POST.get("category")
-            cmpl.description=request.POST.get("description")
-            return HttpResponse("<h1> Complaint placed </h1>")
-        else : return HttpResponse("<h1> complaint could not be placed </h1>")
+            cmpl.identity = request.user
+            # cmpl.name_complaintant = request.POST.get("request.user.name")
+            # cmpl.room_no = request.POST.get("request.user.room_no")
+            cmpl.type_of_complain = request.POST.get("category")
+            cmpl.description = request.POST.get("desc")
+            cmpl.save()
+            return redirect("dashboard")
+        else:
+            return HttpResponse("compaint")
 
 
 

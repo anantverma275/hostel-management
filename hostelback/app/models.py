@@ -39,14 +39,15 @@ class Leave(models.Model):
 	#    return "ID Number: " + self.applicant.roll_no +" | Status: "+ self.status_accepted
 
 class Complaint(models.Model):
-    name_complaintant=models.TextField(default="name")
+    identity = models.ForeignKey("Student", on_delete=models.CASCADE)
+    # name_complaintant=models.TextField()
     description = models.TextField()
     type_of_complain = models.CharField(max_length=20)
     date = models.DateField(auto_now_add=True)
-    room_no = models.IntegerField()
+    # room_no = models.IntegerField()
 
     def __str__(self):
-        return self.room_no + " | Date: " + self.date
+        return str(self.identity.room_no) + " | Date: " + str(self.date) + " | Category: " + self.type_of_complain
 
 class Notice(models.Model):
     content = models.TextField()
