@@ -26,6 +26,7 @@ class Student(AbstractUser):
 
 class Leave(models.Model):
     applicant = models.ForeignKey("Student", on_delete = models.CASCADE)
+    address_to_go=models.TextField(default = "home address")
     start_date = models.DateField()
     end_date = models.DateField()
     reason = models.TextField()

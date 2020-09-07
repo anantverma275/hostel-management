@@ -1,0 +1,122 @@
+.note {
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 0 2px 5px #ccc;
+    padding: 10px;
+    width: 400px;
+    margin: 5px;
+    float: left; }
+  
+  .note .box {
+    word-wrap: break-word; }
+  
+  .note h1 {
+    font-size: 1.1em;
+    margin-bottom: 6px; }
+  
+  .note p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+    word-wrap: break-word; }
+  
+  .note button {
+    position: relative;
+    float: right;
+    margin-right: 10px;
+    color: #f5ba13;
+    border: none;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    outline: none; }
+  
+  form.create-note {
+    position: relative;
+    width: 700px;
+    margin: 30px auto 20px auto;
+    background: #fff;
+    padding: 15px;
+    border-radius: 7px;
+    box-shadow: 0 1px 5px #8a8989; }
+  
+  form.create-note input, form.create-note textarea {
+    width: 100%;
+    border: none;
+    padding: 4px;
+    outline: none;
+    font-size: 1.2em;
+    font-family: inherit;
+    resize: none; }
+  
+  form.create-note button {
+    position: absolute;
+    right: 18px;
+    bottom: -18px;
+    background: #f5ba13;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    outline: none; }
+  
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    .modalDialog {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 99999;
+        opacity:0;
+        -webkit-transition: opacity 100ms ease-in;
+        -moz-transition: opacity 100ms ease-in;
+        transition: opacity 100ms ease-in;
+        pointer-events: none;
+    }
+    .modalDialog:target {
+        opacity:1;
+        pointer-events: auto;
+    }
+    .modalDialog > div {
+        max-width: 800px;
+        width: 90%;
+        position: relative;
+        margin: 10% auto;
+        padding: 20px;
+        border-radius: 3px;
+        background: #fff;
+    }
+    .close {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f26d7d;
+        color: #fff;
+        line-height: 25px;
+        position: absolute;
+        right: -12px;
+        text-align: center;
+        top: -10px;
+        width: 34px;
+        height: 34px;
+        text-decoration: none;
+        font-weight: bold;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        -moz-box-shadow: 1px 1px 3px #000;
+        -webkit-box-shadow: 1px 1px 3px #000;
+        box-shadow: 1px 1px 3px #000;
+        padding-top: 5px;
+    }
+    .close:hover {
+        background: #fa3f6f;
+    }
+    
