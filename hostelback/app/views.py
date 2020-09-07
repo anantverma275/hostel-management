@@ -2,32 +2,43 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from .models import Student,Leave,Complaint
+from django.contrib.auth.decorators import login_required
 # from .forms import StudentRegistrationForm
 
 #bcs2018_007 salil1
 #bcs2018_00 salil1
 
 # Create your views here.
-def signin(request):
+
+def land(request):
     return render(request, "login.html")
 
+def login_req(request):
+    if (request.method == "POST"):
+        print("request aai")
+        rollnumber = request.POST.get('rollnumber')
+        password = request.POST.get('password')
+        print(rollnumber, password)
+        user = authenticate(request, username=rollnumber, password=password)
+        if user is not None:
+            print("User authenticated, username:")
+            login(request, user)
+            print(request.user.name, request.user.roll_no)
+            return redirect('dashboard')
+        else:
+            return render(request, "login.html")
+
 def notice_stud(request):
+
     return render(request,"notice_stud.html")
 
 def redisplay(request):
     return render(request,"base.html")
 
+@login_required
 def dashboard(request):
-    rollnumber = request.POST['rollnumber']
-    password = request.POST['password']
-    print(rollnumber, password)
-    user = authenticate(request, username=rollnumber, password=password)
-    if user is not None:
-        print("User authenticated")
-        login(request, user)
-        return render(request,"base.html",{'uid': rollnumber})
-    else:
-        return HttpResponse("<h1> hag diya </h1>")
+    print(request.user)
+    return render(request, "base.html", {"user": request.user})
 
 
 # def dashboard(request):
@@ -103,7 +114,7 @@ def register(request):
             std.address = request.POST.get("address")
             std.set_password(request.POST.get("password"))
             std.save()
-            return redirect('signin')
+            return redirect('land')
         # form = StudentRegistrationForm(request.POST)
         # print(form)
         # if form.is_valid():

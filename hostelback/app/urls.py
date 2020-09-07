@@ -3,8 +3,8 @@ from . import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('', views.signin, name = "signin"),
-    # path('verify', views.verify, name="verify"),
+    path('', views.land, name="land"),
+    path('login', views.login_req, name="login"),
     path('dashboard', views.dashboard, name="dashboard"),
     path('redisplay', views.redisplay, name="redisplay"),
     path('leave', views.leave, name="leave"),
@@ -16,5 +16,3 @@ urlpatterns = [
     path('register', views.register, name="register"),
     path('logout/', auth_views.LogoutView.as_view(template_name="login.html"), name='logout'),
 ]
-
-

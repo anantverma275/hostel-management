@@ -74,9 +74,11 @@ body {
     <div class="header" style="overflow: hidden;">
         <h2 style=" color: white;display: inline;text-align: center; padding-left: 25em;">HOSTEL MANAGEMENT</h2>
         <p style="color: white;display: inline; float: right; margin: 0em;" >
-          <a href="#">Signout</a>
+          <a href="{% url 'logout' %}">Logout</a>
         </p>
       </div>
+
+      <br><br><br><center><h1>Hello {{ user }}</h1></center>
 
 <div class="sidenav">
   <a href="{% url 'redisplay' %}"><i class="fa fa-fw fa-home"></i>Home</a>

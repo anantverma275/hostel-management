@@ -42,7 +42,7 @@
                     <div class="header">Login Student</div>
                     <div class="content">
                         <div class="image"> {% load static %} <img src="{% static 'login.svg' %}" alt="loginimage"></div>
-                        <form action="{% url 'dashboard' %}" method="POST">
+                        <form method="POST" action="{% url 'login'  %}">
                             {% csrf_token %}
                             <div class="form">
                                 <div class="form-group">
