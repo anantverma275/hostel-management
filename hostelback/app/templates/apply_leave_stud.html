@@ -19,20 +19,21 @@
                         <div class="header">Apply for Leave</div>
                         <form action="{% url 'leave_req' %}" method = "POST">
                             {% csrf_token %}
-                        <div class="content">
-                                <div class="form">
-                                    <div class="form-group">
-                                        <label for="Reason">Reason</label>
-                                        <input type="text" name="reason" placeholder="reason" /> </div>
-                                    <div class="form-group">
-                                        <label for="phn">From(date)</label>
-                                        <input type="date" name="strt_date" placeholder="strt_date" /> </div>
-                                    <div class="form-group">
-                                        <label for="arrival">To(date)</label>
-                                        <input type="date" name="end_date" placeholder="end_date" /> </div>
+                            <div class="content">
+                                    <div class="form">
+                                        <div class="form-group">
+                                            <label for="Reason">Reason</label>
+                                            <input type="text" name="reason" placeholder="reason" /> </div>
+                                        <div class="form-group">
+                                            <label for="phn">From(date)</label>
+                                            <input type="date" name="strt_date" placeholder="strt_date" /> </div>
+                                        <div class="form-group">
+                                            <label for="arrival">To(date)</label>
+                                            <input type="date" name="end_date" placeholder="end_date" /> </div>
+                                    </div>
+                                <div class="footer">
+                                        <button type="submit" class="btn"> Apply </button>
                                 </div>
-                            <div class="footer">
-                                    <button type="submit" class="btn"> Apply </button>
                             </div>
                         </form>
                     </div>

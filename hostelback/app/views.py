@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from .models import Student,Leave,Complaint
+from .models import Student,Leave,Complaint,Notice
 from django.contrib.auth.decorators import login_required
 # from .forms import StudentRegistrationForm
 
@@ -29,7 +29,9 @@ def login_req(request):
             return render(request, "login.html")
 
 def notice_stud(request):
-    return render(request,"notice_stud.html")
+    # printint all the notices
+    notice_lis=Notice.objects.all()
+    return render(request,"notice_stud.html",{'not_lis' : notice_lis})
 
 @login_required
 def redisplay(request):
@@ -46,6 +48,14 @@ def dashboard(request):
 def leave(request):
     # this function is used to just render the page leave.html
     # print(request.user)
+    # we dynamically add all the leave application belonging to this user
+    leave_applications=Leave.objects.filter(identity=request.user)
+    for x in leave_applications:
+        print(x.end_date,x.status_accepted)
+    return render(request, "leave_stud.html", {'all_appns' : leave_applications} )
+
+def apply_leave(request):
+    # this function is used to render leave application page apply_leave_stud.html
     return render(request, "apply_leave_stud.html")
 
 def leave_req(request):
@@ -86,90 +96,97 @@ def complaint_req(request):
 
 @login_required
 def occupant(request):
-    return render(request, "occupants_Student.html")
+    stud_occupant=Student.objects.all()
+    return render(request, "occupants_Student.html",{'studs' : stud_occupant})
+
 
 def profile_change(request):
     return HttpResponse("<h1> profile change walla page aayega yahan </h1>")
 
-# admin views functions
+# # admin views functions
 
-def login_req_admin(request):
-    if (request.method == "POST"):
-        print("request aai")
-        username = request.POST.get('UserName')
-        password = request.POST.get('password_admin')
-        print(username)
-        print(password)
-        user = authenticate(request, username=username, password=password)
-        if username=="admin" and password=="password":
-            return HttpResponse("<h1> welcome admin </h1>")
-        else:
-            return HttpResponse("<h1> wrong username or password </h1>")
-        # if user is not None:
-        #     print("User authenticated, username:")
-        #     login(request, user)
-        #     print(request.user.name, request.user.roll_no)
-        #     return redirect('dashboard_admin')
+# def login_req_admin(request):
+#     if (request.method == "POST"):
+#         print("request aai")
+#         username = request.POST.get('UserName')
+#         password = request.POST.get('password_admin')
+#         print(username)
+#         print(password)
+#         user = authenticate(request, username=username, password=password)
+#         if username=="admin" and password=="password":
+#             return HttpResponse("<h1> welcome admin </h1>")
+#         else:
+#             return HttpResponse("<h1> wrong username or password </h1>")
+#         # if user is not None:
+#         #     print("User authenticated, username:")
+#         #     login(request, user)
+#         #     print(request.user.name, request.user.roll_no)
+#         #     return redirect('dashboard_admin')
         
 
-@admin_login_required
-def dashboard_admin(request):
-    print(request.user)
-    return render(request, "navigation_admin.html", {"user": "admin"})
+# @login_required
+# def dashboard_admin(request):
+#     print(request.user)
+#     return render(request, "navigation_admin.html", {"user": "admin"})
 
-@admin_login_required
-def redisplay_admin(request):
-    return render(request, "navigation_admin.html", {"user": request.user})
-
-
-@admin_login_required
-def leave_admin(request):
-    # this function is used to just render the page leave.html
-    # print(request.user)
-    return render(request, "leave_admin.html")
+# @login_required
+# def redisplay_admin(request):
+#     return render(request, "navigation_admin.html", {"user": request.user})
 
 
-@admin_login_required
-def complaint_admin(request):
-    return render(request, "complaint_admin.html")
+# @login_required
+# def leave_admin(request):
+#     # this function is used to just render the page leave.html
+#     # and show all the leave application that are pending that is not approved
+#     leave_applications=Leave.objects.filter(status_accepted=False)
+#     for x in leave_applications:
+#         print(x.end_date,x.status_accepted)
+#     return render(request, "leave_admin.html", {'all_appns' : leave_applications} )
 
-@admin_login_required
-def occupant_admin(request):
-    return render(request, "occupants_Student.html")
-
-@admin_login_required
-def notice_admin_page(request):
-    return render(request, "notice_admin.html")
-
-@admin_login_required
-def notice_admin_add(request):
-    # used to add a notice using notice model
-    return 
-
-@admin_login_required
-def register_page(request):
-    return render(request, "register.html")
+#     return render(request, "leave_admin.html")
 
 
-def register(request):
-    if (request.method == "POST"):
-        if request.POST.get("name") and request.POST.get("roll_no") and request.POST.get("phn") and request.POST.get("room_no") and request.POST.get("address") and request.POST.get("password"):
-            print("Request aai")
-            std = Student()
-            std.name = request.POST.get("name")
-            std.roll_no = request.POST.get("roll_no")
-            std.ph_no = request.POST.get("phn")
-            std.room_no = request.POST.get("room_no")
-            std.address = request.POST.get("address")
-            std.set_password(request.POST.get("password"))
-            std.save()
-            return redirect('land')
-        # form = StudentRegistrationForm(request.POST)
-        # print(form)
-        # if form.is_valid():
-        #     form.save()
-        #     print("succesS")
-    else:
-        return render(request, "register.html")
+# @login_required
+# def complaint_admin(request):
+#     return render(request, "complaint_admin.html")
+
+# @login_required
+# def occupant_admin(request):
+#     return render(request, "occupants_Student.html")
+
+# @login_required
+# def notice_admin_page(request):
+#     return render(request, "notice_admin.html")
+
+# @login_required
+# def notice_admin_add(request):
+#     # used to add a notice using notice model
+#     return 
+
+# @login_required
+# def register_page(request):
+#     return render(request, "register.html")
+
+
+# def register(request):
+#     if (request.method == "POST"):
+#         if request.POST.get("name") and request.POST.get("roll_no") and request.POST.get("phn") and request.POST.get("room_no") and request.POST.get("address") and request.POST.get("password"):
+#             print("Request aai")
+#             std = Student()
+#             std.name = request.POST.get("name")
+#             std.roll_no = request.POST.get("roll_no")
+#             std.ph_no = request.POST.get("phn")
+#             std.room_no = request.POST.get("room_no")
+#             std.address = request.POST.get("address")
+#             std.set_password(request.POST.get("password"))
+#             std.save()
+#             return redirect('land')
+#         # form = StudentRegistrationForm(request.POST)
+#         # print(form)
+#         # if form.is_valid():
+#         #     form.save()
+#         #     print("succesS")
+#     else:
+#         return render(request, "register.html")
 
 

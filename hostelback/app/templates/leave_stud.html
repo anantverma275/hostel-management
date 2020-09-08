@@ -17,10 +17,9 @@
                 <table class="table">
                     <thead class="thead-dark">
                       <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Room No.</th>
-                        <th scope="col">Name</th>
-                        <th scope="col" >Address</th>
+                        <th scope="col">Serial_number</th>
+                        <th scope="col">identity</th>
+                        <th scope="col">reason</th>
                         <th scope="col">LeaveDate</th>
                         <th scope="col">ArrivalDate</th>
                         <th scope="col">Approve</th>
@@ -28,20 +27,27 @@
                     </thead>
                     <tbody>
                         <!-- ye repeat hoga -->
-                        <tr >
-                            <th scope="row">1</th>
-                            <td>346</td>
-                            <td>salil</td>
-                            <td>ghaziabad</td>
-                            <td>00/00/00</td>
-                            <td>00/00/00</td>
-                            <td style="cursor: pointer; color: rgb(205, 204, 211); background: rgba(134, 132, 132, 0.97)"> approve</td>
-                        </tr>
+                        {% for appn in all_appns%}
+                          <tr >
+                              <td> {{ forloop.counter }}</td>
+                              <td>{{ appn.identity }}</td>
+                              <td>{{ appn.reason }}</td>
+                              <td>{{ appn.start_date }}</td>
+                              <td>{{ appn.end_date }}</td>
+                              <td>{{ appn.status_accepted }}</td>
+                          </tr>
+                        {% endfor %}
                         <!-- yahan tak -->
                     </tbody>
                   </table>
+                  
             </div>
-        </div>   
+        </div>
+        <form method="POST" action="{% url 'apply_leave'  %}">
+          {% csrf_token %}
+          <div class="footer">
+            <button type="submit" class="btn"> Apply for new leave </button>  
+          </form> 
     </div>
 </body>
 

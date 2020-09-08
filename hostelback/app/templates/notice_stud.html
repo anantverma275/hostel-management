@@ -13,20 +13,15 @@
   <body class="text-center">
     <div class="boxed">
         <div>
-
+          {% for note in not_lis %}
             <div class="note">
               <div class="box">
-                <h1>Asbhjbj</h1>    
+                <h1>{{ note.heading }}</h1>
+                <p>{{ note.content }}</p>    
               </div>
               <a href="#openModal-about"><button><i class="fa fa-expand"></i></button></a>
             </div>
-            
-            <div class="note">
-                <div class="box">
-                  <h1>Asbhjbj</h1>    
-                </div>
-                <a href="#openModal-about"><button><i class="fa fa-expand"></i></button></a>
-              </div>
+          {% endfor %}
               
             <div id="openModal-about" class="modalDialog">
                 <div>

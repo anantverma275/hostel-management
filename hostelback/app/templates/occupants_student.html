@@ -15,15 +15,17 @@
       <div class="box">
 
         <!-- yahan pe bandon ke naam roll no room noa ayenge -->
-        <div class="card">
-          <div class="top" style="text-align: center;">
-            <h2 class="title">Salil</h2>
+        {% for stud in studs %}
+          <div class="card">
+            <div class="top" style="text-align: center;">
+              <h2 class="title">{{ stud.name }}</h2>
+            </div>
+            <div class="bottom">    
+              <h1 class= "info">{{ stud.roll_no }}</h1>
+              <h2 class= "info">{{ stud.room_no }}</h2>
+            </div>
           </div>
-          <div class="bottom">    
-            <h1 class= "info">BCS2018_047</h1>
-            <h2 class= "info">346</h2>
-          </div>
-        </div>
+        {% endfor %}
 <!-- yahan tak ek card hai name ka -->
       </div>
     </div>
