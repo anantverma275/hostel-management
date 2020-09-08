@@ -24,6 +24,7 @@ class Student(AbstractUser):
     def __str__(self):
 	    return self.name + self.roll_no
 
+
 class Leave(models.Model):
     identity = models.ForeignKey("Student", on_delete = models.CASCADE, default = 1)
     start_date = models.DateField()

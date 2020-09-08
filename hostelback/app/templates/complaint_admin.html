@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Signin</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="{% static 'complaintstyle.css' %}" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+    <div class="containers">
+        <div class="mid container" >
+            <div style="margin: 5em 10em;overflow: scroll;max-height: 550px; width: 70em;max-width: 75em;">
+                <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Room No.</th>
+                        <th scope="col">Name</th>
+                        <th scope="col" >Reason</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ye repeat hoga -->
+                        <tr >
+                            <th scope="row">1</th>
+                            <td>346</td>
+                            <td>salil</td>
+                            <td>carpenter</td>
+                            <td>window broken</td>
+                            <td style="cursor: pointer; color: rgb(205, 204, 211); background: rgba(134, 132, 132, 0.97)"> Delete</td>
+                        </tr>
+                        <!-- yahan tak -->
+                    </tbody>
+                  </table>
+            </div>
+        </div>   
+    </div>
+</body>
+
+</html>
+

@@ -29,26 +29,23 @@ def login_req(request):
             return render(request, "login.html")
 
 def notice_stud(request):
-
     return render(request,"notice_stud.html")
 
 def redisplay(request):
-    return render(request,"base.html")
+    return render(request, "navigation_user.html", {"user": request.user})
+
 
 @login_required
 def dashboard(request):
     print(request.user)
-    return render(request, "base.html", {"user": request.user})
+    return render(request, "navigation_user.html", {"user": request.user})
 
-
-# def dashboard(request):
-#     return render(request, "dashboard.html")
 
 @login_required
 def leave(request):
     # this function is used to just render the page leave.html
     # print(request.user)
-    return render(request, "leave.html")
+    return render(request, "apply_leave_stud.html")
 
 def leave_req(request):
     # this function accepts the parameters and data for leave application and saves it to database
@@ -65,11 +62,11 @@ def leave_req(request):
             leave_obj.save()
             return redirect("dashboard")
         else:
-            return HttpResponse(request, "leave.html")
+            return HttpResponse(request, "apply_leave_stud.html")
         # return render(request, "leave.htm")
 @login_required
 def complaint(request):
-    return render(request, "complaint.html")
+    return render(request, "apply_complaint_stud.html")
 
 def complaint_req(request):
     if (request.method == "POST"):
@@ -85,6 +82,33 @@ def complaint_req(request):
             return redirect("dashboard")
         else:
             return HttpResponse("compaint")
+
+# admin views functions
+
+def login_req_admin(request):
+    if (request.method == "POST"):
+        print("request aai")
+        username = request.POST.get('UserName')
+        password = request.POST.get('password_admin')
+        print(username)
+        print(password)
+        user = authenticate(request, username=username, password=password)
+        if username=="admin" and password=="password":
+            return HttpResponse("<h1> welcome admin </h1>")
+        else:
+            return HttpResponse("<h1> wrong username or password </h1>")
+        # if user is not None:
+        #     print("User authenticated, username:")
+        #     login(request, user)
+        #     print(request.user.name, request.user.roll_no)
+        #     return redirect('dashboard_admin')
+        
+
+@login_required
+def dashboard_admin(request):
+    print(request.user)
+    return render(request, "navigation_admin.html", {"user": "admin"})
+
 
 
 
