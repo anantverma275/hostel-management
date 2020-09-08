@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def land(request):
-    return render(request, "login.html")
+    return render(request, "login_stud.html")
 
 def login_req(request):
     if (request.method == "POST"):
@@ -26,7 +26,26 @@ def login_req(request):
             print(request.user.name, request.user.roll_no)
             return redirect('dashboard')
         else:
-            return render(request, "login.html")
+            return render(request, "login_stud.html")
+
+
+def login_admin_req(request):
+    if (request.method == "POST"):
+        print("request aai")
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            print("User authenticated, username:")
+            login(request, user)
+            print(request.user.username)
+            return redirect('admin_dashboard')
+        else:
+            return render(request, "login_admin.html")
+
+def admin_dashboard(request):
+    print(request.user)
+    return render(request, "admin_dash")
 
 def notice_stud(request):
 

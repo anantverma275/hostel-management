@@ -10,7 +10,7 @@ phn_validator = RegexValidator(r"^[0-9]{10}$", "Phone number must be of 10 digit
 
 
 class Student(AbstractUser):
-    username = None
+    username = ''
     name = models.CharField(max_length = 30, blank = True)
     ph_no = models.IntegerField(validators=[phn_validator])
     roll_no = models.CharField(max_length = 11, primary_key=True)
@@ -33,6 +33,12 @@ class Leave(models.Model):
 
     def __str__(self):
         return "ID Number: " + str(self.identity.roll_no) +" | Status: "+ str(self.status_accepted)
+
+# class Admin(AbstractUser):
+#     identity = models.ForeignKey("User", on_delete = models.CASCADE)
+#     isAdmin = models.BooleanField(default = True)
+#     def __str__(self):
+# 	    return self.name + self.roll_no
 
 class Complaint(models.Model):
     identity = models.ForeignKey("Student", on_delete=models.CASCADE)
