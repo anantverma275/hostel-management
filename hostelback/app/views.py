@@ -17,9 +17,10 @@ def login_req(request):
     if (request.method == "POST"):
         print("request aai")
         rollnumber = request.POST.get('rollnumber')
+        email= rollnumber[:3] + "_" + rollnumber[3:7] + rollnumber[8:].lstrip("0") + "@iiitm.ac.in"
         password = request.POST.get('password')
         print(rollnumber, password)
-        user = authenticate(request, username=rollnumber, password=password)
+        user = authenticate(request, username=email, password=password)
         if user is not None:
             print("User authenticated, username:")
             login(request, user)
@@ -116,6 +117,7 @@ def register(request):
         if request.POST.get("name") and request.POST.get("roll_no") and request.POST.get("phn") and request.POST.get("room_no") and request.POST.get("address") and request.POST.get("password"):
             print("Request aai")
             std = Student()
+            std.email = request.POST.get("roll_no")[:3] + "_" + request.POST.get("roll_no")[3:7] + request.POST.get("roll_no")[8:].lstrip("0") + "@iiitm.ac.in"
             std.name = request.POST.get("name")
             std.roll_no = request.POST.get("roll_no")
             std.ph_no = request.POST.get("phn")

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import PermissionsMixin
+from .managers import StudentManager
 # from django.utils.translation import ugettext_lazy as _0
 
 from django.core.validators import RegexValidator
@@ -10,19 +11,23 @@ phn_validator = RegexValidator(r"^[0-9]{10}$", "Phone number must be of 10 digit
 
 
 class Student(AbstractUser):
-    username = ''
+    username = None
+    email = models.EmailField(unique=True)
     name = models.CharField(max_length = 30, blank = True)
-    ph_no = models.IntegerField(validators=[phn_validator])
-    roll_no = models.CharField(max_length = 11, primary_key=True)
+    ph_no = models.IntegerField( validators=[phn_validator], null=True)
+    roll_no = models.CharField(max_length = 11)
     address = models.TextField()
-    room_no = models.IntegerField()
-    # username = roll_no
-    USERNAME_FIELD = 'roll_no'
-    REQUIRED_FIELDS = [ 'name']
-    # objects = CustomUserManager()
+    room_no = models.IntegerField( null=True)
+    is_staff = models.BooleanField(default=False)
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+    objects = StudentManager()
 
     def __str__(self):
-	    return self.name + self.roll_no
+        if self.is_staff == False:
+	        return self.name + self.roll_no
+        else:
+            return "Adminstrator: " + self.email 
 
 class Leave(models.Model):
     identity = models.ForeignKey("Student", on_delete = models.CASCADE, default = 1)
