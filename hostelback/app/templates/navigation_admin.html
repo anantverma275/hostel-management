@@ -77,12 +77,12 @@ body {
       </div>
 
 <div class="sidenav">
-  <a href="#"><i class="fa fa-fw fa-home"></i>Home</a>
-  <a href="#"><i class="fas fa-user-plus"></i>Register</a>
-  <a href="#"><i class="fa fa-thumb-tack">Notice</a>
-  <a href="#"><i class="fa fa-fw fa-exclamation">Complaint</a>
-  <a href="#"><i class="fa fa-fw fa-suitcase">Leave</a>
-  <a href="#"><i class="fa fa-fw fa-user">Occupants</a>
+  <a href="{% url 'redisplay_admin' %}"><i class="fa fa-fw fa-home"></i>Home</a>
+  <a href="{% url 'register' %}"><i class="fas fa-user-plus"></i>Register</a>
+  <a href="{% url 'notice_admin_page' %}"><i class="fa fa-thumb-tack">Notice</a>
+  <a href="{% url 'complaint_admin' %}"><i class="fa fa-fw fa-exclamation">Complaint</a>
+  <a href="{% url 'leave_admin' %}"><i class="fa fa-fw fa-suitcase">Leave</a>
+  <a href="{% url 'occupant_admin' %}"><i class="fa fa-fw fa-user">Occupants</a>
 </div>
 
   

@@ -31,6 +31,7 @@ def login_req(request):
 def notice_stud(request):
     return render(request,"notice_stud.html")
 
+@login_required
 def redisplay(request):
     return render(request, "navigation_user.html", {"user": request.user})
 
@@ -66,7 +67,7 @@ def leave_req(request):
         # return render(request, "leave.htm")
 @login_required
 def complaint(request):
-    return render(request, "apply_complaint_stud.html")
+    return render(request, "complaint.html")
 
 def complaint_req(request):
     if (request.method == "POST"):
@@ -82,6 +83,13 @@ def complaint_req(request):
             return redirect("dashboard")
         else:
             return HttpResponse("compaint")
+
+@login_required
+def occupant(request):
+    return render(request, "occupants_Student.html")
+
+def profile_change(request):
+    return HttpResponse("<h1> profile change walla page aayega yahan </h1>")
 
 # admin views functions
 
@@ -104,17 +112,44 @@ def login_req_admin(request):
         #     return redirect('dashboard_admin')
         
 
-@login_required
+@admin_login_required
 def dashboard_admin(request):
     print(request.user)
     return render(request, "navigation_admin.html", {"user": "admin"})
 
+@admin_login_required
+def redisplay_admin(request):
+    return render(request, "navigation_admin.html", {"user": request.user})
 
 
+@admin_login_required
+def leave_admin(request):
+    # this function is used to just render the page leave.html
+    # print(request.user)
+    return render(request, "leave_admin.html")
 
 
-def profile_change(request):
-    return HttpResponse("<h1> profile change walla page aayega yahan </h1>")
+@admin_login_required
+def complaint_admin(request):
+    return render(request, "complaint_admin.html")
+
+@admin_login_required
+def occupant_admin(request):
+    return render(request, "occupants_Student.html")
+
+@admin_login_required
+def notice_admin_page(request):
+    return render(request, "notice_admin.html")
+
+@admin_login_required
+def notice_admin_add(request):
+    # used to add a notice using notice model
+    return 
+
+@admin_login_required
+def register_page(request):
+    return render(request, "register.html")
+
 
 def register(request):
     if (request.method == "POST"):
