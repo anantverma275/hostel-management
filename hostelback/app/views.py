@@ -1,12 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from .models import Student,Leave,Complaint
+from .models import *
 from django.contrib.auth.decorators import login_required
-# from .forms import StudentRegistrationForm
-
-#bcs2018_007 salil1
-#bcs2018_00 salil1
 
 # Create your views here.
 
@@ -29,54 +25,24 @@ def login_req(request):
         else:
             return render(request, "login_stud.html")
 
-
-def login_admin_req(request):
-    if (request.method == "POST"):
-        print("request aai")
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            print("User authenticated, username:")
-            login(request, user)
-            print(request.user.username)
-            return redirect('admin_dashboard')
-        else:
-            return render(request, "login_admin.html")
-
-def admin_dashboard(request):
-    print(request.user)
-    return render(request, "admin_dash")
-
 def notice_stud(request):
-
-    return render(request,"notice_stud.html")
-
-def redisplay(request):
-    return render(request,"base.html")
+    notice_lis = Notice.objects.all()
+    return render(request, "notice_stud.html", {'not_lis': notice_lis})
 
 @login_required
 def dashboard(request):
-    print(request.user)
-    return render(request, "base.html", {"user": request.user})
-
-
-# def dashboard(request):
-#     return render(request, "dashboard.html")
+    leave_applications = Leave.objects.filter(identity=request.user)
+    return render(request, "base.html", {"user": request.user, 'all_appns': leave_applications})
 
 @login_required
 def leave(request):
-    # this function is used to just render the page leave.html
-    # print(request.user)
     return render(request, "leave.html")
 
+@login_required
 def leave_req(request):
-    # this function accepts the parameters and data for leave application and saves it to database
     print(request.user)
     if (request.method == "POST"):
         if request.POST.get("reason") and request.POST.get("strt_date") and request.POST.get("end_date") :
-            # print("leave application ki request aayi")
-            # now we fill relevant leave parameters 
             leave_obj=Leave()
             leave_obj.identity = request.user
             leave_obj.start_date=request.POST.get("strt_date")
@@ -86,31 +52,24 @@ def leave_req(request):
             return redirect("dashboard")
         else:
             return HttpResponse(request, "leave.html")
-        # return render(request, "leave.htm")
+
 @login_required
 def complaint(request):
     return render(request, "complaint.html")
 
+@login_required
 def complaint_req(request):
     if (request.method == "POST"):
         if request.POST.get("category") and request.POST.get("desc"):
             print("complaint ki request aayi")
             cmpl=Complaint()
             cmpl.identity = request.user
-            # cmpl.name_complaintant = request.POST.get("request.user.name")
-            # cmpl.room_no = request.POST.get("request.user.room_no")
             cmpl.type_of_complain = request.POST.get("category")
             cmpl.description = request.POST.get("desc")
             cmpl.save()
             return redirect("dashboard")
         else:
             return HttpResponse("compaint")
-
-
-
-
-def profile_change(request):
-    return HttpResponse("<h1> profile change walla page aayega yahan </h1>")
 
 def register(request):
     if (request.method == "POST"):
@@ -126,12 +85,11 @@ def register(request):
             std.set_password(request.POST.get("password"))
             std.save()
             return redirect('land')
-        # form = StudentRegistrationForm(request.POST)
-        # print(form)
-        # if form.is_valid():
-        #     form.save()
-        #     print("succesS")
     else:
         return render(request, "register.html")
 
 
+@login_required
+def occupant(request):
+    stud_occupant = Student.objects.filter(is_superuser=False)
+    return render(request, "occupants_Student.html", {'studs': stud_occupant})

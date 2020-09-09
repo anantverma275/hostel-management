@@ -79,13 +79,44 @@ body {
       </div>
 
       <br><br><br><center><h1>Hello {{ user }}</h1></center>
+      
+      <center>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Serial_number</th>
+            <th scope="col">identity</th>
+            <th scope="col">reason</th>
+            <th scope="col">LeaveDate</th>
+            <th scope="col">ArrivalDate</th>
+            <th scope="col">Approve</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for appn in all_appns%}
+          <tr>
+            <td> {{ forloop.counter }}</td>
+            <td>{{ appn.identity }}</td>
+            <td>{{ appn.reason }}</td>
+            <td>{{ appn.start_date }}</td>
+            <td>{{ appn.end_date }}</td>
+            <td>{{ appn.status_accepted }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      </center>
+
+      <div class="footer">
+          <a href="{% url 'leave' %}" class="btn"> Apply for new leave </button>
+      </form>
 
 <div class="sidenav">
   <a href="{% url 'dashboard' %}"><i class="fa fa-fw fa-home"></i>Home</a>
   <a href="{% url 'notice_stud' %}"><i class="fa fa-thumb-tack">Notice</a>
   <a href="{% url 'complaint' %}"><i class="fa fa-fw fa-exclamation">Complaint</a>
   <a href="{% url 'leave' %}"><i class="fa fa-fw fa-suitcase">Leave</a>
-  <a href="#"><i class="fa fa-fw fa-user">Occupants</a>
+  <a href="{% url 'occupant' %}"><i class="fa fa-fw fa-user">Occupants</a>
 </div>
 
   
