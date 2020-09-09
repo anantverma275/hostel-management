@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import PermissionsMixin
 from .managers import StudentManager
-# from django.utils.translation import ugettext_lazy as _0
 
 from django.core.validators import RegexValidator
 phn_validator = RegexValidator(r"^[0-9]{10}$", "Phone number must be of 10 digits only consisting of number form 0-9.")
@@ -39,19 +38,12 @@ class Leave(models.Model):
     def __str__(self):
         return "ID Number: " + str(self.identity.roll_no) +" | Status: "+ str(self.status_accepted)
 
-# class Admin(AbstractUser):
-#     identity = models.ForeignKey("User", on_delete = models.CASCADE)
-#     isAdmin = models.BooleanField(default = True)
-#     def __str__(self):
-# 	    return self.name + self.roll_no
 
 class Complaint(models.Model):
     identity = models.ForeignKey("Student", on_delete=models.CASCADE)
-    # name_complaintant=models.TextField()
     description = models.TextField()
     type_of_complain = models.CharField(max_length=20)
     date = models.DateField(auto_now_add=True)
-    # room_no = models.IntegerField()
 
     def __str__(self):
         return str(self.identity.room_no) + " | Date: " + str(self.date) + " | Category: " + self.type_of_complain
