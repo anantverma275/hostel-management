@@ -15,7 +15,7 @@ def login_req(request):
         rollnumber = request.POST.get('rollnumber')
         email= rollnumber[:3] + "_" + rollnumber[3:7] + rollnumber[8:].lstrip("0") + "@iiitm.ac.in"
         password = request.POST.get('password')
-        print(rollnumber, password)
+        print(email, password)
         user = authenticate(request, username=email, password=password)
         if user is not None:
             print("User authenticated, username:")
@@ -72,21 +72,24 @@ def complaint_req(request):
             return HttpResponse("compaint")
 
 def register(request):
-    if (request.method == "POST"):
-        if request.POST.get("name") and request.POST.get("roll_no") and request.POST.get("phn") and request.POST.get("room_no") and request.POST.get("address") and request.POST.get("password"):
-            print("Request aai")
-            std = Student()
-            std.email = request.POST.get("roll_no")[:3] + "_" + request.POST.get("roll_no")[3:7] + request.POST.get("roll_no")[8:].lstrip("0") + "@iiitm.ac.in"
-            std.name = request.POST.get("name")
-            std.roll_no = request.POST.get("roll_no")
-            std.ph_no = request.POST.get("phn")
-            std.room_no = request.POST.get("room_no")
-            std.address = request.POST.get("address")
-            std.set_password(request.POST.get("password"))
-            std.save()
-            return redirect('land')
+    if request.user.is_superuser == True:
+        if (request.method == "POST"):
+            if request.POST.get("name") and request.POST.get("roll_no") and request.POST.get("phn") and request.POST.get("room_no") and request.POST.get("address") and request.POST.get("password"):
+                print("Request aai")
+                std = Student()
+                std.email = request.POST.get("roll_no")[:3] + "_" + request.POST.get("roll_no")[3:7] + request.POST.get("roll_no")[8:].lstrip("0") + "@iiitm.ac.in"
+                std.name = request.POST.get("name")
+                std.roll_no = request.POST.get("roll_no")
+                std.ph_no = request.POST.get("phn")
+                std.room_no = request.POST.get("room_no")
+                std.address = request.POST.get("address")
+                std.set_password(request.POST.get("password"))
+                std.save()
+                return redirect('land')
+        else:
+            return render(request, "register.html")
     else:
-        return render(request, "register.html")
+        return HttpResponse("Forbidden Page.")
 
 
 @login_required

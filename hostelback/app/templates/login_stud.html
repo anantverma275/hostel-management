@@ -19,10 +19,12 @@
                     <div class="header">Login Admin</div>
                     <div class="content">
                         <div class="image">{% load static %} <img src="{% static 'login.svg' %}" alt="loginimage"> </div>
+                        <form action="{% url 'register' %}" method = "POST">
+                            {% csrf_token %}
                         <div class="form">
                             <div class="form-group">
-                                <label for="UserName">UserName</label>
-                                <input type="text" name="UserName" placeholder="UserName" /> </div>
+                                <label for="email">Email</label>
+                                <input type="text" name="email" placeholder="UserName" /> </div>
                             <div class="form-group">
                                 <label for="Password">Password </label>
                                 <input type="password" name="Password" /> </div>
@@ -31,6 +33,7 @@
                     <div class="footer">
                         <button type="button" class="btn"> Submit </button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
